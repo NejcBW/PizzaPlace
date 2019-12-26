@@ -1,0 +1,36 @@
+﻿@using PizzaPlace.Shared
+
+<h1>@Title</h1>
+
+<fieldset>
+    <p>
+        <label for="name">Name:</label>
+        <input id="name" @bind="@Customer.Name" />
+    </p>
+    <p>
+        <label for="street">Street:</label>
+        <input id="street" @bind="@Customer.Street" />
+    </p>
+    <p>
+        <label for="city">City:</label>
+        <input id="city" @bind="@Customer.City" />
+    </p>
+
+    <button @onclick="@(()=> Submit(Customer))">
+        Checkout
+    </button>
+
+</fieldset>
+
+@code {
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public Customer Customer { get; set; }
+
+    [Parameter]
+    public Action<Customer> Submit { get; set; }
+
+}

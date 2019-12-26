@@ -1,0 +1,24 @@
+﻿@using PizzaPlace.Shared
+
+<h1>@Title</h1>
+
+@foreach (var pizza in Menu.Pizzas)
+{
+    <PizzaItem Pizza="@pizza" ButtonTitle="Order"
+               ButtonClass="btn btn-success"
+               Selected="@((p)=> Selected.InvokeAsync(p))" />
+}
+
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public Menu Menu { get; set; }
+
+    [Parameter]
+    //public Action<Pizza> Selected { get; set; }
+    public EventCallback<Pizza> Selected { get; set; }
+
+}
