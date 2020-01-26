@@ -27,5 +27,6 @@ namespace PizzaPlace.Shared
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Spiciness Spiciness { get; set; }
+        public List<PizzaOrder> PizzaOrders { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PizzaPlace.Shared;
+using PizzaPlace.Client.Services;
 
 namespace PizzaPlace.Client
 {
@@ -8,8 +9,9 @@ namespace PizzaPlace.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IMenuService, HardCodedMenuService>();
-            services.AddTransient<IOrderService, ConsoleOrderService>();
+            services.AddTransient<IMenuService, MenuService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddSingleton<State>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

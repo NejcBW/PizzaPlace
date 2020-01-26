@@ -1,11 +1,15 @@
 ﻿@page "/"
 @using PizzaPlace.Shared
+@using Microsoft.AspNetCore.Components
 @inject IMenuService  menuService
 @inject IOrderService orderService
+@inject State State
+@inject NavigationManager nav
 
 <PizzaList Title="Our selected list of pizzas"
            Menu="@State.Menu"
-           Selected="@((pizza) => AddToBasket(pizza))" />
+           Selected="@((pizza) => AddToBasket(pizza))"
+           ShowPizzaInformation="@((pizza) => ShowPizzaInformation(pizza))" />
 
 <ShoppingBasket Title="Your current order"
                 Basket="@State.Basket"
@@ -15,6 +19,8 @@
 <CustomerEntry Title="Please enter your details below"
                Customer="@State.Basket.Customer"
                Submit="@(async (_) => await PlaceOrder())" />
+
+<button @onclick="ToTest">To Test</button>
 
 @code{
     public void AddToBasket(Pizza pizza)
@@ -36,11 +42,25 @@
         await orderService.PlaceOrder(State.Basket);
     }
 
-    private State State { get; } = new State();
-
     protected override async Task OnInitializedAsync()
     {
         State.Menu = await menuService.GetMenu();
+    }
+
+    private void ShowPizzaInformation(Pizza pizza)
+    {
+        State.CurrentPizza = pizza;
+        Console.WriteLine($"Id: {State.CurrentPizza.Id}\n" +
+            $"Name: {State.CurrentPizza.Name}\n" +
+            $"Price: {State.CurrentPizza.Price}\n" +
+            $"Spiciness: {State.CurrentPizza.Spiciness}");
+        nav.NavigateTo("/PizzaInfo");
+    }
+
+    private void ToTest()
+    {
+        Console.WriteLine("Executing To Test");
+        nav.NavigateTo("/Test");
     }
 
 

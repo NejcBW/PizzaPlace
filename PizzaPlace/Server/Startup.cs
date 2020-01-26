@@ -53,7 +53,7 @@ namespace PizzaPlace.Server
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                // endpoints.MapControllers();
 
                 // used as default and does the same as:
                 // endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
